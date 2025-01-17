@@ -1,0 +1,4 @@
+.has-dropdown:focus-within .navbar-dropdown {
+  display: block !important
+  ;
+}

@@ -57,12 +57,13 @@
 
           <a class="navbar-item"> Documentation </a>
 
-          <div class="navbar-item has-dropdown">
+          <div class="navbar-item has-dropdown" data-dropdown>
             <a
               class="navbar-link navbar-dropdown-link"
               aria-label="menu"
               aria-expanded="false"
               data-target="dropy"
+              data-dropdown-button
             >
               More
             </a>
@@ -75,12 +76,13 @@
               <a class="navbar-item"> Report an issue </a>
             </div>
           </div>
-          <div class="navbar-item has-dropdown">
+          <div class="navbar-item has-dropdown" data-dropdown>
             <a
               class="navbar-link navbar-dropdown-link"
               aria-label="menu"
               aria-expanded="false"
               data-target="dropy1"
+              data-dropdown-button
             >
               More
             </a>
@@ -129,9 +131,49 @@
             const $target = document.getElementById(target);
 
             // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+
             el.classList.toggle("is-active");
             $target.classList.toggle("is-active");
           });
+        });
+      });
+
+      window.addEventListener("load", function () {
+        // wait until the page loads before working with HTML elements
+        document.addEventListener("click", function (event) {
+          //click listener on the document
+          document.querySelectorAll(".navbar-dropdown").forEach(function (el) {
+            if (el !== event.target) el.classList.remove("is-active");
+            // close any showing dropdown that isn't the one just clicked
+          });
+          document
+            .querySelectorAll(".navbar-dropdown-link")
+            .forEach(function (el) {
+              if (el !== event.target) el.classList.remove("is-active");
+              // close any showing dropdown that isn't the one just clicked
+            });
+          if (event.target.matches(".navbar-dropdown-link")) {
+            event.target
+              .closest(".has-dropdown")
+              .querySelector(".navbar-dropdown")
+              .classList.toggle("is-active");
+          }
+          if (
+            event.target.matches(".navbar-dropdown-link") &&
+            event.target.matches(".is-active")
+          ) {
+            event.target
+              .closest(".has-dropdown")
+              .querySelector(".navbar-dropdown")
+              .classList.remove("is-active");
+          }
+          if (event.target.matches(".navbar-dropdown-link")) {
+            event.target
+              .closest(".has-dropdown")
+              .querySelector(".navbar-dropdown-link")
+              .classList.toggle("is-active");
+          }
+          // if this is a dropdown button being clicked, toggle the show class
         });
       });
     </script>

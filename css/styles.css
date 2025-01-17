@@ -1,4 +1,12 @@
-.has-dropdown:focus-within .navbar-dropdown {
-  display: block !important
-  ;
+.navbar-dropdown {
+  display: none;
+}
+.navbar-dropdown.is-active {
+  display: block;
+}
+.navbar-link.is-active,
+.navbar-link.is-selected,
+a.navbar-item.is-active,
+a.navbar-item.is-selected {
+  background: #eaeaea;
 }
